@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html class=""><head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <script type="application/shiny-singletons"></script>  <script type="application/html-dependencies">json2[2014.02.04];jquery[1.12.4];babel-polyfill[6.7.2];shiny[1.0.0]</script><script src="R%20and%20geodata_files/json2-min.js"></script>
+<script src="R%20and%20geodata_files/jquery.js"></script>
+<script src="R%20and%20geodata_files/babel-polyfill.js"></script>
+<link href="R%20and%20geodata_files/shiny.css" rel="stylesheet">
+<script src="R%20and%20geodata_files/shiny.js"></script>  <script src="R%20and%20geodata_files/rmd_loader.js"></script>
+  <link href="R%20and%20geodata_files/rmd_loader.css" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" type="text/css" href="R%20and%20geodata_files/bootstrap.css"><script src="R%20and%20geodata_files/bootstrap.js"></script><script src="R%20and%20geodata_files/html5shiv.js"></script><script src="R%20and%20geodata_files/respond.js"></script><script src="R%20and%20geodata_files/tabsets.js"></script><script src="R%20and%20geodata_files/htmlwidgets.js"></script><link rel="stylesheet" type="text/css" href="R%20and%20geodata_files/leaflet.css"><script src="R%20and%20geodata_files/leaflet.js"></script><link rel="stylesheet" type="text/css" href="R%20and%20geodata_files/leafletfix.css"><script src="R%20and%20geodata_files/leaflet_002.js"></script><link rel="stylesheet" type="text/css" href="R%20and%20geodata_files/rmd_perf.css"><script src="R%20and%20geodata_files/rmd_perf.js"></script><meta name="rstudio_origin" content="127.0.0.1:31325"><script src="R%20and%20geodata_files/rsiframe.js"></script>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="pandoc">
+
+
+<meta name="author" content="Andreja Radović, PhD">
+
+
+<title>R and geodata</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { text-decoration: underline; } /* DataType */
+code > span.co { font-style: italic; } /* Comment */
+code > span.al { font-weight: bold; } /* Alert */
+code > span.er { font-weight: bold; } /* Error */
+code > span.wa { font-style: italic; } /* Warning */
+code > span.cf { font-weight: bold; } /* ControlFlow */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.do { font-style: italic; } /* Documentation */
+code > span.an { font-style: italic; } /* Annotation */
+code > span.cv { font-style: italic; } /* CommentVar */
+code > span.in { font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="R%20and%20geodata_files/styles2.css" type="text/css">
+
+<script type="text/javascript" src="R%20and%20geodata_files/MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body><div id="MathJax_Message" style="display: none;"></div>
+  <div>
+    <div data-display-if="!output.__reactivedoc__" style="display: none;">
+      <div id="rmd_loader_wrapper">
+        <div id="rmd_loader" style="">
+          <img src="R%20and%20geodata_files/rmd_loader.gif">
+          <p>Loading</p>
+        </div>
+      </div>
+    </div>
+    <div id="__reactivedoc__" class="shiny-html-output shiny-bound-output">
+
+
+
+
+
+
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="section-header">
+
+
+
+<h1 class="title toc-ignore"><strong>R and geodata</strong></h1>
+<h4 class="author"><em>Andreja Radović, PhD</em></h4>
+<h4 class="date"><em>4th of October 2017</em></h4>
+
+</div>
+
+
+<div id="section-what-is-r" class="section level2">
+<h2>What is R?</h2>
+<div class="columns-2">
+<ul>
+<li><p>a programming <strong>language</strong> and <strong>environment</strong> for statistical analysis and visualisation</p></li>
+<li><p>open-source == large community</p></li>
+<li><p>great number of contributed packages (diverse disciplines)</p></li>
+</ul>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-2-1.png"><!-- --></p>
+</div>
+<div class="columns-1">
+
+</div>
+<div id="section-cran" class="section level2">
+<h2>CRAN</h2>
+<p><a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></p>
+<p><a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" class="uri">https://cran.r-project.org/web/packages/available_packages_by_name.html</a></p>
+<p><a href="https://cran.r-project.org/view=Spatial" class="uri">https://CRAN.R-project.org/view=Spatial</a></p>
+<p><a href="https://cran.r-project.org/web/views/SpatioTemporal.html" class="uri">https://cran.r-project.org/web/views/SpatioTemporal.html</a></p>
+</div>
+<div id="section-cran-spatial---three-general-types-of-packages" class="section level2">
+<h2>CRAN “Spatial” - three general types of packages</h2>
+<p>Packages specialised for:</p>
+<ol style="list-style-type: decimal">
+<li><p>accessing geodata and other software functions, interoperability</p></li>
+<li><p>visualisation of geodata</p></li>
+<li><p>analysis of geodata</p></li>
+</ol>
+</div>
+<div id="section-packages-for-access-and-interoperability" class="section level2">
+<h2>1) Packages for access and interoperability</h2>
+<ul>
+<li><p>Geospatial Data Abstraction Library (GDAL): <em>rgdal</em></p></li>
+<li><p>GRASS GIS: <em>spgrass6</em></p></li>
+<li><p>SAGA GIS: <em>RSAGA</em></p></li>
+<li><p>Access, PostgreSQL/PostGIS: <em>RODBC</em>, <em>rpostgis</em>, <em>postGIStools</em></p></li>
+<li><p>…</p></li>
+</ul>
+</div>
+<div id="section-packages-for-geodata-visualisation" class="section level2">
+<h2>2) Packages for geodata visualisation</h2>
+<ul>
+<li><p>rasterVis</p></li>
+<li><p>maps</p></li>
+<li><p>plotKML</p></li>
+<li><p>plotGoogleMaps</p></li>
+<li><p>…</p></li>
+<li><p>(also, base, lattice and ggplot general packages)</p></li>
+</ul>
+</div>
+<div id="section-much-more-on-github" class="section level1">
+<h1>Much more on GitHub</h1>
+<div id="section-packages-for-analysis" class="section level2">
+<h2>2) Packages for analysis</h2>
+<ul>
+<li><p>point patterns: spatial, spatstat</p></li>
+<li><p>geostatistics (2D/3D), likelihood approach, Bayes methods: <em>geoR</em>, <em>gstat</em>, <em>RandomFields</em></p></li>
+<li><p>2D carthesian geometry operations: <em>Rgeos</em></p></li>
+<li><p>circular, directional statistics: <em>circular</em></p></li>
+<li><p>cluster’s detection: <em>Dcluster</em></p></li>
+<li><p>analytics on greeded data: <em>raster</em></p></li>
+<li><p>geometry on the sphere, great circle analyses: <em>geosphere</em></p></li>
+<li><p>remotely sensed data: <em>remotesensing</em></p></li>
+<li><p>…</p></li>
+</ul>
+</div>
+<div id="section-basic-data-types-in-r" class="section level2">
+<h2>Basic data types in R</h2>
+<table class="table table-condensed">
+<thead>
+<tr class="header">
+<th align="center">N dimensions</th>
+<th align="right">Homogenious</th>
+<th align="right">Heterogenious</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="right">Atomic Vector</td>
+<td align="right">List</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="right">Matrix</td>
+<td align="right">Data Frame</td>
+</tr>
+<tr class="odd">
+<td align="center">N</td>
+<td align="right">Array</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-r-object-oriented-language" class="section level2">
+<h2>R, object oriented language</h2>
+<div class="figure">
+<img src="R%20and%20geodata_files/R_basic.png" style="width:50.0%">
+
+</div>
+</div>
+<div id="section-but-we-need-a-model-of-the-real-world" class="section level2">
+<h2>But we need a model of the real world</h2>
+<div class="columns-2">
+<div class="figure">
+<img src="R%20and%20geodata_files/real_world.png">
+
+</div>
+<p>points, lines, polygons</p>
+</div>
+</div>
+<div id="section-spatial-in-r-short-history" class="section level2">
+<h2>“Spatial” in R, short history</h2>
+<ul>
+<li><p>pre-2003, sporadic</p></li>
+<li><p>2003: workshop at DSC</p></li>
+<li><p>2003: start of <em>r-sig-geo</em></p></li>
+<li><p>2003: <em>rgdal</em> on CRAN</p></li>
+<li><p>2005: <em>sp</em> on CRAN; <em>sp</em> support in <em>rgdal</em></p></li>
+</ul>
+</div>
+<div id="section-spatial-in-r-short-history-2" class="section level2">
+<h2>“Spatial” in R, short history 2</h2>
+<ul>
+<li><p>2008: <em>Applied Spatial Data Analysis with R</em></p></li>
+<li><p>2011: <em>rgeos</em> on CRAN</p></li>
+<li><p>2013: second edition of Applied Spatial Data Analysis with R</p></li>
+<li><p>2016-7: simple features for R (finished?)</p></li>
+<li><p>2017-8: spatiotemporal tidy arrays for R (design phase)</p></li>
+</ul>
+</div>
+<div id="section-package-sp" class="section level2">
+<h2>Package ‘sp’</h2>
+<p>First package for classes and methods for spatial data in R</p>
+<ul>
+<li><p>classes and methods for geo data in R/S language</p></li>
+<li><p>does not provide any analytical methods</p></li>
+<li><p>S4 data class</p></li>
+<li><p>generic methods for <strong>points</strong>, <strong>lines</strong>, <strong>polygons</strong> and <strong>grids</strong>/<strong>surfaces</strong></p></li>
+</ul>
+</div>
+<div id="section-clases-in-sp---vector-example-for-points" class="section level2">
+<h2>Clases in ‘sp’ - vector, example for points</h2>
+<p>Data structure for points</p>
+<div class="figure">
+<img src="R%20and%20geodata_files/sp_points.png">
+
+</div>
+</div>
+<div id="section-clases-in-sp---rastersgrids" class="section level2">
+<h2>Clases in ‘sp’ - rasters/grids</h2>
+<p>Data structure for grids</p>
+<div class="figure">
+<img src="R%20and%20geodata_files/sp_grids.png">
+
+</div>
+</div>
+<div id="section-general-structure-spatialdataframes" class="section level2">
+<h2>General structure Spatial*DataFrames</h2>
+<ul>
+<li><p><span class="citation">@data</span> - data.frame, attributes</p></li>
+<li><p><span class="citation">@coords.nrs</span> - variables in data.frame with coordinate info</p></li>
+<li><p><span class="citation">@coords</span> - coordinates</p></li>
+<li><p><span class="citation">@bbox</span> - spatial extent</p></li>
+<li><p><span class="citation">@proj4string</span> - spatial reference</p></li>
+</ul>
+</div>
+<div id="section-methods-for-sp-classes" class="section level2">
+<h2>Methods for ‘sp’ classes</h2>
+<ul>
+<li><p>dimensions(x)</p></li>
+<li><p>spTransform(x, CRS)</p></li>
+<li><p>bbox(x)</p></li>
+<li><p>coordinates(x)</p></li>
+<li><p>gridded(x)</p></li>
+<li><p>spplot(x)</p></li>
+<li><p>over(x, y)</p></li>
+<li><p>spsample(x)</p></li>
+<li><p>geometry(x)</p></li>
+</ul>
+</div>
+<div id="section-simple-features---cran" class="section level2">
+<h2>Simple features - CRAN</h2>
+<p>Package ‘sf’</p>
+<div class="figure">
+<img src="R%20and%20geodata_files/sf_CRAN.png">
+
+</div>
+</div>
+<div id="section-why-sp-was-not-enough" class="section level2">
+<h2>Why ‘sp’ was not enough?</h2>
+<p>But still no support for gridded data!</p>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-4-1.png"><!-- --></p>
+</div>
+<div id="section-ogciso---simple-features" class="section level2">
+<h2>OGC/ISO - simple features</h2>
+<p>Simple feature hierarchy</p>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-5-1.png"><!-- --></p>
+</div>
+<div id="section-simple-features" class="section level2">
+<h2>Simple features?</h2>
+<ul>
+<li>ISO standard that is widely adopted</li>
+<li>used in spatial databases</li>
+<li><em>feature</em>: abstraction of real world phenomena</li>
+<li><em>simple feature</em>: feature with all geometric attributes described piecewise by straight line or planar interpolation between sets of points</li>
+<li>7 + 10 types, 68 classes, 7 classes ok for 99% of the use cases</li>
+<li>text and binary serialisations (WKT, WKB)</li>
+<li>support for mixed type (<code>GEOMETRYCOLLECTION</code>), and type mix (<code>GEOMETRY</code>)</li>
+<li>support for empty geometry</li>
+</ul>
+</div>
+<div id="section-before-sf-package" class="section level2">
+<h2>Before ‘sf’ package</h2>
+<p>Simple feature objects automatically imported as ‘sp’ object using package <em>rgeos</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rgeos)
+my_poly &lt;-<span class="st"> </span><span class="kw">readWKT</span>(<span class="st">"POLYGON((1 0,0 1,1 2,2 1,1 0))"</span>)
+<span class="kw">plot</span>(my_poly, <span class="dt">main=</span><span class="st">"WKT defined polygon"</span>)</code></pre></div>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-6-1.png"><!-- --></p>
+</div>
+<div id="section-start-preparing-spatial-objects-from" class="section level2">
+<h2>Start preparing spatial objects from…</h2>
+<p>Not usual way to prepare geodata this way</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#polygons from set of coordinates</span>
+Sr1 &lt;-<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>)))
+Sr2 &lt;-<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>), <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>)))
+Sr3 &lt;-<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">4</span>), <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">5</span>)))
+Sr4 &lt;-<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">5</span>), <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>)), <span class="dt">hole =</span> <span class="ot">TRUE</span>)
+Srs1 &lt;-<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr1), <span class="st">"s1"</span>)
+Srs2 &lt;-<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr2), <span class="st">"s2"</span>)
+<span class="co">#several polygons into list</span>
+Srs3 &lt;-<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr4, Sr3), <span class="st">"s3/4"</span>)
+<span class="co">#create spatial polygons, still no CRS/SRID</span>
+SpP &lt;-<span class="st"> </span><span class="kw">SpatialPolygons</span>(<span class="kw">list</span>(Srs1, Srs2, Srs3), <span class="dv">1</span>:<span class="dv">3</span>)</code></pre></div>
+</div>
+<div id="section-inspect-the-data" class="section level2">
+<h2>Inspect the data…</h2>
+<p>Stil necessary to attach <em>Spatial</em> information (CRS/SRID) and optionally attributes <em>data.frame</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(SpP)</code></pre></div>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-8-1.png"><!-- --></p>
+</div>
+<div id="section-interactive-visualisations-with-leaflet" class="section level2">
+<h2>Interactive visualisations with Leaflet</h2>
+<p>… still no CRS/SRID but we can visualise it in different ways</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="kw">leaflet</span>()
+<span class="kw">leaflet</span>(<span class="dt">height =</span> <span class="st">"300px"</span>) %&gt;%<span class="st"> </span><span class="kw">addPolygons</span>(<span class="dt">data =</span> SpP)</code></pre></div>
+<div id="htmlwidget-a0bbc89ff8bda5582bfb" style="width: 672px; height: 300px; position: relative;" class="leaflet html-widget html-widget-static-bound leaflet-container leaflet-fade-anim" tabindex="0"><div class="leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-tile-pane"></div><div class="leaflet-objects-pane"><div class="leaflet-shadow-pane"></div><div class="leaflet-overlay-pane"><svg class="leaflet-zoom-animated" style="transform: translate3d(-14px, -6px, 0px);" width="701" height="313" viewBox="-14 -6 701 313"><g><path stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" stroke="#03F" stroke-opacity="0.5" stroke-width="5" fill="#03F" fill-opacity="0.2" class="leaflet-clickable" d="M177 218L132 127L268 81L268 172z"></path></g><g><path stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" stroke="#03F" stroke-opacity="0.5" stroke-width="5" fill="#03F" fill-opacity="0.2" class="leaflet-clickable" d="M314 218L177 218L268 172z"></path></g><g><path stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" stroke="#03F" stroke-opacity="0.5" stroke-width="5" fill="#03F" fill-opacity="0.2" class="leaflet-clickable" d="M268 81L541 81L314 218L268 172zM314 127L314 172L359 172L359 127z"></path></g></svg></div><div class="leaflet-marker-pane"></div><div class="leaflet-popup-pane"></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="#" title="Zoom in">+</a><a class="leaflet-control-zoom-out" href="#" title="Zoom out">-</a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="http://leafletjs.com/" title="A JS library for interactive maps">Leaflet</a></div></div></div></div>
+<script type="application/json" data-for="htmlwidget-a0bbc89ff8bda5582bfb">{"x":{"calls":[{"method":"addPolygons","args":[[[{"lng":[2,1,4,4,2],"lat":[2,4,5,3,2]}],[{"lng":[5,2,4,5],"lat":[2,2,3,2]}],[{"lng":[4,10,5,4,4],"lat":[5,5,2,3,5]},{"lng":[5,5,6,6,5],"lat":[4,3,3,4,4]}]],null,null,{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"dashArray":null,"smoothFactor":1,"noClip":false},null]}],"limits":{"lat":[2,5],"lng":[1,10]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-more-usually-import-the-geodata" class="section level2">
+<h2>More usually, import the geodata</h2>
+<p>Import via GDAL/OGR library</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HRV_adm2 &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="kw">getwd</span>(),<span class="st">"HRV_adm2"</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">encoding=</span><span class="st">"UTF-8"</span>)</code></pre></div>
+<pre><code>OGR data source with driver: ESRI Shapefile 
+Source: "D:/SRCE_razno/meetup", layer: "HRV_adm2"
+with 560 features
+It has 11 fields</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#take a look from how many level 1 administrative division</span>
+<span class="kw">levels</span>(<span class="kw">as.factor</span>(HRV_adm2@data$ID_1))</code></pre></div>
+<pre><code> [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14"
+[15] "15" "16" "17" "18" "19" "20" "21"</code></pre>
+</div>
+<div id="section-manipulate-geodata" class="section level2">
+<h2>Manipulate geodata</h2>
+<p>Diverse functions from Geos library</p>
+<p>Access functionality of other GIS software</p>
+<p>Result exported via Rgdal (GDAL/OGR library)</p>
+</div>
+<div id="section-manipulate-geodata-1" class="section level2">
+<h2>Manipulate geodata</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(maptools); 
+<span class="kw">head</span>(HRV_adm2@data[<span class="dv">1</span>:<span class="dv">6</span>], <span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>  ID_0 ISO  NAME_0 ID_1             NAME_1 ID_2
+0   57 HRV Croatia    8 Krapinsko-Zagorska  180
+1   57 HRV Croatia    8 Krapinsko-Zagorska  181</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#levels of variable, ID for county</span>
+<span class="kw">levels</span>(<span class="kw">as.factor</span>(HRV_adm2@data$ID_1))</code></pre></div>
+<pre><code> [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14"
+[15] "15" "16" "17" "18" "19" "20" "21"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#make union of polygons, union by county ID</span>
+HRV_adm2_union &lt;-<span class="st">  </span><span class="kw">unionSpatialPolygons</span>(HRV_adm2, HRV_adm2@data$ID_1)</code></pre></div>
+</div>
+<div id="section-visualise-the-result" class="section level2">
+<h2>Visualise the result</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(HRV_adm2_union, <span class="dt">col=</span><span class="st">"aliceblue"</span>, <span class="dt">main=</span><span class="st">"Union of polygons"</span>)
+<span class="kw">box</span>(<span class="dt">lty =</span> <span class="st">'solid'</span>)</code></pre></div>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-12-1.png"><!-- --></p>
+</div>
+<div id="section-integrate-data" class="section level2">
+<h2>Integrate data</h2>
+<p>Attach data from other sources, e.g.&nbsp;Bureau of Statistics</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HRV_adm1 &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="st">"D:</span><span class="ch">\\</span><span class="st">podloge</span><span class="ch">\\</span><span class="st">GADM</span><span class="ch">\\</span><span class="st">Croatia</span><span class="ch">\\</span><span class="st">HRV_adm_shp"</span>,<span class="st">"HRV_adm1"</span>, <span class="dt">encoding=</span><span class="st">"Windows-1250"</span>,<span class="dt">verbose =</span> F, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+
+data &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">"county_fake_data.xlsx"</span>, 
+                     <span class="dt">as.data.frame=</span>T, <span class="dt">stringsAsFactors =</span> T,  
+                     <span class="dt">sheetIndex=</span><span class="dv">1</span>, <span class="dt">encoding=</span><span class="st">"UTF-8"</span> )
+<span class="co">#merge by spatial polygons</span>
+merged_data &lt;-<span class="st"> </span><span class="kw">merge</span>(HRV_adm1, data, <span class="dt">by.x=</span><span class="st">"ID_1"</span>, <span class="dt">by.y=</span><span class="st">"ID_COUNTY"</span>, <span class="dt">all.x=</span>T)</code></pre></div>
+</div>
+<div id="section-visualise-the-result-1" class="section level2">
+<h2>Visualise the result</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(merged_data[<span class="dv">13</span>], <span class="dt">col=</span><span class="kw">colorRampPalette</span>(<span class="kw">brewer.pal</span>(<span class="dv">5</span>,<span class="st">"Blues"</span>))(<span class="dv">21</span>),
+       <span class="dt">axes=</span>T, <span class="dt">main=</span><span class="st">"Variable NO"</span>)</code></pre></div>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-16-1.png"><!-- --></p>
+</div>
+<div id="section-example-select-lobor-and-oroslavje" class="section level2">
+<h2>Example, select Lobor and Oroslavje</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(HRV_adm2@data[<span class="dv">1</span>:<span class="dv">4</span>], <span class="dt">n=</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>  ID_0 ISO  NAME_0 ID_1
+0   57 HRV Croatia    8
+1   57 HRV Croatia    8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">select &lt;-<span class="st"> </span>HRV_adm2[HRV_adm2@data$NAME_2==<span class="st">"Lobor"</span> |<span class="st"> </span>HRV_adm2@data$NAME_2==<span class="st">"Oroslavje"</span>,]
+<span class="kw">class</span>(select)</code></pre></div>
+<pre><code>[1] "SpatialPolygonsDataFrame"
+attr(,"package")
+[1] "sp"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#prepare random sample in selection</span>
+p_100 &lt;-<span class="st"> </span><span class="kw">spsample</span>(select,<span class="dv">100</span>, <span class="st">"random"</span>) </code></pre></div>
+</div>
+<div id="section-visualise-the-result-2" class="section level2">
+<h2>Visualise the result</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(select, <span class="dt">main=</span><span class="st">"Lobor and Oroslavje"</span>)
+<span class="kw">points</span>(p_100, <span class="dt">pch=</span><span class="dv">15</span>, <span class="dt">cex=</span><span class="fl">0.9</span>, <span class="dt">col=</span><span class="st">"green4"</span>)</code></pre></div>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-18-1.png"><!-- --></p>
+</div>
+<div id="section-export-some-elements" class="section level2">
+<h2>Export some elements</h2>
+<p>Export selected polygons as Esri shapefile, KML, PostgreSQL/PostGIS…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">writeOGR</span> (select, <span class="st">"."</span>, <span class="st">"Lobor_Orosavje"</span>, <span class="dt">driver=</span><span class="st">"ESRI Shapefile"</span>, <span class="dt">overwrite=</span>T)
+<span class="kw">writeOGR</span> (select, <span class="st">"Lobor_Orosavje.kml"</span>, <span class="st">"."</span>, <span class="dt">driver=</span><span class="st">"KML"</span>, <span class="dt">overwrite=</span>T)
+<span class="kw">writeOGR</span>(select, <span class="st">"PG:dbname=GEO_meetup"</span>, <span class="dt">layer_options =</span> <span class="st">"geometry_name=geom"</span>, <span class="st">"states"</span>, <span class="st">"PostgreSQL"</span>)</code></pre></div>
+</div>
+<div id="section-example-additional-customisation-for-leaflet" class="section level2">
+<h2>Example: additional customisation for Leaflet</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HRV_adm0 &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="st">"D:</span><span class="ch">\\</span><span class="st">podloge</span><span class="ch">\\</span><span class="st">GADM</span><span class="ch">\\</span><span class="st">Croatia</span><span class="ch">\\</span><span class="st">HRV_adm_shp"</span>,<span class="st">"HRV_adm0"</span>, <span class="dt">verbose =</span> F, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">encoding=</span><span class="st">"UTF-8"</span>)
+HRV_adm1 &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="st">"D:</span><span class="ch">\\</span><span class="st">podloge</span><span class="ch">\\</span><span class="st">GADM</span><span class="ch">\\</span><span class="st">Croatia</span><span class="ch">\\</span><span class="st">HRV_adm_shp"</span>,<span class="st">"HRV_adm1"</span>, <span class="dt">verbose =</span> F, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">encoding=</span><span class="st">"UTF-8"</span>)
+HRV_adm2 &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="st">"D:</span><span class="ch">\\</span><span class="st">podloge</span><span class="ch">\\</span><span class="st">GADM</span><span class="ch">\\</span><span class="st">Croatia</span><span class="ch">\\</span><span class="st">HRV_adm_shp"</span>,<span class="st">"HRV_adm2"</span>, <span class="dt">verbose =</span> F, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">encoding=</span><span class="st">"UTF-8"</span>)
+<span class="co">#create icon</span>
+rest_icon &lt;-<span class="st"> </span><span class="kw">makeIcon</span>(
+  <span class="dt">iconUrl =</span> <span class="st">"R_logo.png"</span>,
+  <span class="dt">iconWidth =</span> <span class="dv">12</span>, <span class="dt">iconHeight =</span> <span class="dv">12</span>,
+  <span class="dt">iconAnchorX =</span> <span class="dv">15</span>, <span class="dt">iconAnchorY =</span> <span class="dv">10</span>)
+<span class="co">#make our own pallette</span>
+colors&lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">brewer.pal</span>(<span class="dv">5</span>,<span class="st">"Blues"</span>))(<span class="dv">21</span>)
+<span class="co">#points to visualise</span>
+<span class="kw">load</span>(<span class="st">"df.RData"</span>)
+<span class="co">#make it spatial</span>
+<span class="kw">coordinates</span>(df) &lt;-<span class="st"> </span><span class="er">~</span><span class="st"> </span>lng+lat
+<span class="co">#what is CRS?</span>
+<span class="kw">proj4string</span>(df) &lt;-<span class="st"> </span><span class="kw">CRS</span>(<span class="st">"+proj=longlat +datum=WGS84"</span>) <span class="co">#EPSG:4326</span></code></pre></div>
+</div>
+<div id="section-our-data-in-leaflet" class="section level2">
+<h2>Our data in Leaflet</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">leaflet</span>()  %&gt;%<span class="st"> </span><span class="kw">addTiles</span>()
+m&lt;-<span class="st"> </span>m %&gt;%<span class="st"> </span><span class="kw">addPolygons</span>(<span class="dt">data=</span>HRV_adm1, <span class="dt">fillColor =</span> colors, <span class="dt">stroke =</span> F, <span class="dt">fillOpacity =</span> <span class="fl">0.5</span>,<span class="dt">weight=</span><span class="dv">3</span>)
+m&lt;-<span class="st"> </span>m %&gt;%<span class="st"> </span><span class="kw">addPolygons</span>(<span class="dt">data=</span>HRV_adm0, <span class="dt">fill=</span>F, <span class="dt">color=</span><span class="st">"#f93"</span>, <span class="dt">stroke =</span> T, <span class="dt">fillOpacity =</span> <span class="fl">0.5</span>,<span class="dt">weight=</span><span class="dv">1</span>)
+m&lt;-<span class="st"> </span>m %&gt;%<span class="st"> </span><span class="kw">addPolygons</span>(<span class="dt">data=</span>HRV_adm2, <span class="dt">fill=</span>F, <span class="dt">color=</span><span class="st">"gray"</span>, <span class="dt">stroke =</span> T, <span class="dt">fillOpacity =</span> <span class="fl">0.5</span>,<span class="dt">weight=</span><span class="dv">1</span>)
+m&lt;-<span class="st"> </span>m %&gt;%<span class="st"> </span><span class="kw">addMarkers</span>(<span class="kw">coordinates</span>(df)[,<span class="dv">1</span>],<span class="kw">coordinates</span>(df)[,<span class="dv">2</span>],  <span class="dt">icon =</span> rest_icon)
+m
+<span class="kw">library</span>(htmlwidgets)
+<span class="kw">saveWidget</span>(m, <span class="dt">file=</span><span class="st">"m.html"</span>)</code></pre></div>
+</div>
+<div id="section-use-capture-from-leaflet-for-dynamic-documents-from-rmarkdown" class="section level2">
+<h2>Use capture from Leaflet for dynamic documents from RMarkdown</h2>
+<div class="figure">
+<img src="R%20and%20geodata_files/leaflet_capture.png" style="width:50.0%">
+
+</div>
+</div>
+<div id="section-gridded-data-in-sp" class="section level2">
+<h2>Gridded data in ‘sp’</h2>
+<p>Again, we can create objects, here start from grid topology definition</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">topology &lt;-<span class="st"> </span><span class="kw">GridTopology</span>(<span class="dt">cellcentre.offset =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">cellsize=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">cells.dim =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">6</span>)) <span class="co">#cellcentre.offset  numeric; vector smin coordinates of cell centre in each dim </span>
+sp_grid &lt;-<span class="st"> </span><span class="kw">SpatialGrid</span>(topology)
+<span class="kw">summary</span>(sp_grid)</code></pre></div>
+<pre><code> Length       Class        Mode 
+     72 SpatialGrid          S4 </code></pre>
+</div>
+<div id="section-what-we-have-made-so-far" class="section level2">
+<h2>What we have made so far</h2>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-23-1.png"><!-- --></p>
+</div>
+<div id="section-create-grid-object-from-points" class="section level2">
+<h2>Create Grid object from points</h2>
+<p>Start to build objects from grid topology, coordinates or read gridded data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">points_grid &lt;-<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">1</span>:<span class="dv">4</span>) 
+sp_points_grid &lt;-<span class="st"> </span><span class="kw">SpatialPoints</span>(points_grid)</code></pre></div>
+</div>
+<div id="section-visualize-prepared-grid" class="section level2">
+<h2>Visualize prepared grid</h2>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-25-1.png"><!-- --></p>
+</div>
+<div id="section-continuation-to-full-grid" class="section level2">
+<h2>Continuation to full grid</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#from SpatialPoints SpatialPixels</span>
+pix_grid &lt;-<span class="st"> </span><span class="kw">SpatialPixels</span>(sp_points_grid)
+<span class="co">#or this way object gridded (SpatialPoints into SpatialPixels)</span>
+<span class="kw">class</span>(sp_points_grid)</code></pre></div>
+<pre><code>[1] "SpatialPoints"
+attr(,"package")
+[1] "sp"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gridded</span>(sp_points_grid) &lt;-<span class="st"> </span>T
+<span class="co">#is objet full grid?</span>
+<span class="kw">fullgrid</span>(pix_grid)  </code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div id="section-continuation-to-full-grid-1" class="section level2">
+<h2>Continuation to full grid</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#set for TRUE and create SpatialGrid</span>
+<span class="kw">fullgrid</span>(pix_grid) &lt;-<span class="st"> </span>T
+<span class="co">#add atributes (data.frame), to spatial components</span>
+atr_grid &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">12</span>)) <span class="co">#data.frame</span>
+my_grid &lt;-<span class="st"> </span><span class="kw">SpatialGridDataFrame</span>(pix_grid,  atr_grid)</code></pre></div>
+</div>
+<div id="section-visualize-prepared-grid-1" class="section level2">
+<h2>Visualize prepared grid</h2>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-28-1.png"><!-- --></p>
+</div>
+<div id="section-import-gridded-data-with-sp-package" class="section level2">
+<h2>Import gridded data with <em>sp</em> package</h2>
+<p>Common way of importing gridded data; calculate summary statistics…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dem &lt;-<span class="st"> </span><span class="kw">readGDAL</span> (<span class="st">"dem_1k.asc"</span>)</code></pre></div>
+<p>dem_1k.asc has GDAL driver AAIGrid and has 445 rows and 470 columns</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#summary statistics</span>
+<span class="kw">summary</span>(dem@data$band1)</code></pre></div>
+<p>Min. 1st Qu. Median Mean 3rd Qu. Max. 0,0 0,0 166,4 344,0 560,6 2484,0</p>
+</div>
+<div id="section-with-all-types-of-spatial-data-statistical-procedures-from-r" class="section level2">
+<h2>With all types of spatial data, statistical procedures from R</h2>
+<p>As example plot histogram of elevation values</p>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-30-1.png"><!-- --></p>
+</div>
+<div id="section-prepare-additional-data-sptransform" class="section level2">
+<h2>Prepare additional data, spTransform</h2>
+<p>When data not on the same CRS</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ETRS_LEA &lt;-<span class="st"> </span><span class="kw">CRS</span>(<span class="st">"+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs"</span>)
+<span class="co">#sp transform to European equal area projection as dem</span>
+HRV_adm1_ETRS &lt;-<span class="st"> </span><span class="kw">spTransform</span>(HRV_adm1, ETRS_LEA)
+
+<span class="co">#spatial extents</span>
+<span class="kw">bbox</span>(HRV_adm1_ETRS)</code></pre></div>
+<pre><code>  min     max</code></pre>
+<p>x 4594092 5061199 y 2163680 2624962</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bbox</span>(dem)</code></pre></div>
+<pre><code>  min     max</code></pre>
+<p>x 4593479 5063479 y 2181875 2626875</p>
+</div>
+<div id="section-visualise-gridded-data-with-attributes" class="section level2">
+<h2>Visualise gridded data with attributes</h2>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-32-1.png"><!-- --></p>
+</div>
+<div id="section-export-as" class="section level2">
+<h2>Export as …</h2>
+<p>ESRI asc, SAGA sgrd…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">writeGDAL</span>(dem, <span class="dt">fname=</span><span class="st">"dem.asc"</span>, <span class="dt">drivername=</span><span class="st">"AAIGrid"</span>,  <span class="dt">mvFlag=</span><span class="dv">99999</span>)
+<span class="kw">writeGDAL</span> (dem, <span class="dt">fname=</span> <span class="st">"dem.sdat"</span>,  <span class="dt">drivername=</span><span class="st">"SAGA"</span>) 
+<span class="kw">writeGDAL</span> (dem, <span class="dt">fname=</span><span class="st">"dem"</span>, <span class="dt">drivername=</span><span class="st">"GSBG"</span>)</code></pre></div>
+</div>
+<div id="section-gridded-data-with-raster-package" class="section level2">
+<h2>Gridded data with <em>raster</em> package</h2>
+<p>Extremely popular for analysis of big rasters</p>
+<p>Data does not need to be in memory</p>
+<p>Easy shift to ‘sp’ classes</p>
+<p>Extract wanted spatial extent or aggregate by polygon, select on points…</p>
+<p>Import gridded data from Worldclim database, minimal temperature</p>
+</div>
+<div id="section-get-data-from-worldclim-database---raster-object" class="section level2">
+<h2>Get data from Worldclim database - <em>raster</em> object</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
+<span class="kw">getData</span>(<span class="st">'worldclim'</span>, <span class="dt">var=</span><span class="st">'tmin'</span>, <span class="dt">res=</span><span class="fl">0.5</span>, <span class="dt">lon=</span><span class="dv">5</span>, <span class="dt">lat=</span><span class="dv">45</span>)</code></pre></div>
+<p>class : RasterStack dimensions : 3600, 3600, 12960000, 12 (nrow, 
+ncol, ncell, nlayers) resolution : 0,008333333, 0,008333333 (x, y) 
+extent : 0, 30, 30, 60 (xmin, xmax, ymin, ymax) coord. ref. : 
++proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 names : tmin1_16,
+ tmin2_16, tmin3_16, tmin4_16, tmin5_16, tmin6_16, tmin7_16, tmin8_16, 
+tmin9_16, tmin10_16, tmin11_16, tmin12_16 min values : -195, -202, -193,
+ -176, -131, -96, -66, -66, -81, -110, -159, -181 max values : 116, 113,
+ 120, 148, 198, 249, 271, 268, 232, 192, 158, 130</p>
+</div>
+<div id="section-plot-raster-object" class="section level2">
+<h2>Plot <em>raster</em> object</h2>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-35-1.png"><!-- --></p>
+</div>
+<div id="section-extract-values-for-polygons" class="section level2">
+<h2>Extract values for polygons</h2>
+<p>Values of Digital elevation model for each county</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dem_r &lt;-<span class="st"> </span><span class="kw">raster</span>(dem)
+<span class="co">#extracted values for each 1 km cell in polygons</span>
+<span class="co">#object of class list, length 21, as many counties</span>
+dem_county &lt;-<span class="st"> </span><span class="kw">extract</span>(dem_r, HRV_adm1_ETRS)</code></pre></div>
+</div>
+<div id="section-r-specific-loops" class="section level2">
+<h2>R specific loops</h2>
+<p>Ask for maximal value of elevation by county</p>
+<p>[[1]][1] 1711,7</p>
+<p>[[2]][1] 758,4</p>
+<p>[[3]][1] 948,5</p>
+<p>[[4]][1] 1030,4</p>
+<p>[[5]][1] 930,7</p>
+<p>[[6]][1] 1164,9</p>
+<p>[[7]][1] 1354,6</p>
+<p>[[8]][1] 496,8</p>
+<p>[[9]][1] 975,3</p>
+<p>[[10]][1] 1608,2</p>
+<p>[[11]][1] 297</p>
+<p>[[12]][1] 576,8</p>
+<p>[[13]][1] 964,3</p>
+<p>[[14]][1] 1370</p>
+<p>[[15]][1] 563,2</p>
+<p>[[16]][1] 1742,3</p>
+<p>[[17]][1] 797,9</p>
+<p>[[18]][1] 835,8</p>
+<p>[[19]][1] 213,9</p>
+<p>[[20]][1] 1424,1</p>
+<p>[[21]][1] 1007,3</p>
+</div>
+</div>
+<div id="section-static-map-visualisation-example" class="section level1">
+<h1>Static map Visualisation example</h1>
+<div id="section-example-static-map---locally-stored-data" class="section level2">
+<h2>Example: static map - locally stored data</h2>
+<p>First we need to prepare data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#import geo data into R</span>
+<span class="kw">library</span>(rgdal)
+<span class="co">#read via GDAL/OGR</span>
+W &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="kw">getwd</span>(),<span class="st">"TM_WORLD_BORDERS-0.3"</span>, <span class="dt">verbose =</span> F, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) </code></pre></div>
+</div>
+<div id="section-inspect-the-data-1" class="section level2">
+<h2>Inspect the data</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#inspect CRS/SRID</span>
+W@proj4string</code></pre></div>
+<p>CRS arguments: +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#take a look at the data</span>
+<span class="kw">head</span>(W@data[<span class="dv">1</span>:<span class="dv">5</span>], <span class="dt">n=</span><span class="dv">1</span>)</code></pre></div>
+<p>FIPS ISO2 ISO3 UN NAME 0 AC AG ATG 28 Antigua and Barbuda</p>
+</div>
+<div id="section-base-graphic-system-static-map" class="section level2">
+<h2>Base graphic system, static map</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(W, <span class="dt">main=</span><span class="st">"Hello World"</span>)  </code></pre></div>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-40-1.png"><!-- --></p>
+</div>
+<div id="section-base-graphics" class="section level2">
+<h2>Base graphics</h2>
+<p>Zoom, additional improvements</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#create gridlines</span>
+grat &lt;-<span class="st"> </span><span class="kw">gridlines</span>(W, <span class="dt">easts=</span><span class="kw">seq</span>(-<span class="dv">40</span>,<span class="dv">20</span>,<span class="dt">by=</span><span class="dv">5</span>), <span class="dt">norths=</span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">80</span>,<span class="dt">by=</span><span class="dv">5</span>), <span class="dt">ndiscr =</span> <span class="dv">20</span>)
+<span class="co">#zoom to specified spatial extent on plot</span>
+<span class="kw">plot</span>(W, <span class="dt">xlim=</span><span class="kw">c</span>(-<span class="dv">30</span>,<span class="dv">30</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">30</span>,<span class="dv">58</span>)) 
+<span class="co">#add gridlines</span>
+<span class="kw">lines</span>(grat, <span class="dt">lty=</span><span class="dv">2</span>)
+<span class="co">#add title</span>
+<span class="kw">title</span>(<span class="dt">main=</span><span class="st">"My map with zoom"</span>, <span class="dt">sub=</span><span class="st">"Gridlines added"</span>)</code></pre></div>
+</div>
+<div id="section-static-map" class="section level2">
+<h2>Static map</h2>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-42-1.png"><!-- --></p>
+</div>
+<div id="section-base-graphic-different-adjustments" class="section level2">
+<h2>Base graphic, different adjustments</h2>
+<p>Prepare additional objects to be plotted</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">"df.RData"</span>) <span class="co">#load data.frame saved in R format</span>
+<span class="co">#create spatial objects from data.frame</span>
+<span class="kw">coordinates</span>(df) &lt;-<span class="st"> </span><span class="er">~</span><span class="st"> </span>lng  +<span class="st"> </span>lat
+<span class="co">#define CRS to the points</span>
+<span class="co">#World Geodetic System - WGS</span>
+<span class="kw">proj4string</span>(df) &lt;-<span class="st"> </span><span class="kw">CRS</span>(<span class="st">"+proj=longlat +datum=WGS84"</span>) <span class="co">#EPSG:4326</span>
+<span class="co">#colors(2)</span>
+col_2 &lt;-<span class="st"> </span><span class="kw">colors</span>()[<span class="dv">351</span>]
+x &lt;-<span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="fl">13.9</span>, <span class="fl">20.2</span>, <span class="fl">20.2</span>, <span class="fl">13.9</span>), <span class="dt">y=</span><span class="kw">c</span>(<span class="fl">42.5</span>, <span class="fl">42.5</span>,<span class="fl">46.5</span>, <span class="fl">46.5</span>)))</code></pre></div>
+</div>
+<div id="section-improved-map" class="section level2">
+<h2>Improved map</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(W,  <span class="dt">col=</span>col_2, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="fl">13.9</span>, <span class="fl">19.6</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">42.5</span>, <span class="fl">46.5</span>), <span class="dt">main=</span><span class="st">"Hello Croatia"</span>, <span class="dt">lwd=</span><span class="dv">2</span>,  <span class="dt">axes=</span>F,  <span class="dt">xlab=</span><span class="st">"Longitude"</span>, <span class="dt">ylab=</span><span class="st">"Latitude"</span>)
+
+<span class="co">#add points</span>
+<span class="kw">points</span>(df,  <span class="dt">pch=</span><span class="dv">22</span>, <span class="dt">cex=</span><span class="fl">0.75</span>, <span class="dt">col=</span><span class="st">"yellow"</span>)
+
+<span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">col.axis =</span> <span class="st">"dark gray"</span>)
+<span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">col.axis =</span> <span class="st">"dark gray"</span>)
+<span class="kw">box</span>(<span class="dt">lty =</span> <span class="st">'solid'</span>, <span class="dt">col =</span> <span class="st">'light gray'</span>)
+<span class="kw">text</span>(<span class="dt">x=</span><span class="fl">14.7</span>, <span class="dt">y=</span><span class="dv">46</span>, <span class="dt">labels=</span><span class="st">"AUSTRIA"</span>, <span class="dt">cex=</span><span class="fl">0.75</span>)       
+<span class="kw">text</span>(<span class="dt">x=</span><span class="fl">17.8</span>, <span class="dt">y=</span><span class="fl">44.5</span>, <span class="dt">labels=</span><span class="st">"BOSNIA AND HERZEGOVINA"</span>, <span class="dt">cex=</span><span class="fl">0.75</span>)   
+<span class="kw">text</span>(<span class="dt">x=</span><span class="dv">18</span>, <span class="dt">y=</span><span class="fl">46.4</span>, <span class="dt">labels=</span><span class="st">"HUNGARY"</span>, <span class="dt">cex=</span><span class="fl">0.75</span>) 
+<span class="kw">text</span>(<span class="dt">x=</span><span class="fl">19.2</span>, <span class="dt">y=</span><span class="fl">42.7</span>, <span class="dt">labels=</span><span class="st">"MONTENEGRO"</span>, <span class="dt">cex=</span><span class="fl">0.75</span>)</code></pre></div>
+</div>
+<div id="section-improved-map-1" class="section level2">
+<h2>Improved map</h2>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-45-1.png"><!-- --></p>
+</div>
+<div id="section-leaflet-example-point-marker" class="section level2">
+<h2>Leaflet example, point marker</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">leaflet</span>()
+m &lt;-<span class="st"> </span><span class="kw">addTiles</span>(m)
+m &lt;-<span class="st"> </span><span class="kw">addMarkers</span>(m, <span class="dt">lng=</span>  <span class="fl">15.970281</span>, <span class="dt">lat=</span> <span class="fl">45.793467</span>, <span class="dt">popup=</span><span class="st">"Plazza centar"</span>)
+m</code></pre></div>
+<div id="htmlwidget-afa651a2897c1f4244bf" style="width: 672px; height: 672px; position: relative;" class="leaflet html-widget html-widget-static-bound leaflet-container leaflet-fade-anim" tabindex="0"><div class="leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-tile-pane"><div class="leaflet-layer"><div class="leaflet-tile-container"></div><div class="leaflet-tile-container leaflet-zoom-animated"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(169px, 179px, 0px);" src="R%20and%20geodata_files/11684_003.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(169px, -77px, 0px);" src="R%20and%20geodata_files/11683_002.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-87px, 179px, 0px);" src="R%20and%20geodata_files/11684_002.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(425px, 179px, 0px);" src="R%20and%20geodata_files/11684.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(169px, 435px, 0px);" src="R%20and%20geodata_files/11685_002.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-87px, -77px, 0px);" src="R%20and%20geodata_files/11683_003.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(425px, -77px, 0px);" src="R%20and%20geodata_files/11683.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-87px, 435px, 0px);" src="R%20and%20geodata_files/11685_003.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(425px, 435px, 0px);" src="R%20and%20geodata_files/11685.png"></div></div></div><div class="leaflet-objects-pane"><div class="leaflet-shadow-pane"><img src="R%20and%20geodata_files/marker-shadow.png" class="leaflet-marker-shadow leaflet-zoom-animated" style="margin-left: -12px; margin-top: -41px; width: 41px; height: 41px; transform: translate3d(336px, 336px, 0px);"></div><div class="leaflet-overlay-pane"></div><div class="leaflet-marker-pane"><img src="R%20and%20geodata_files/marker-icon.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" style="margin-left: -12px; margin-top: -41px; width: 25px; height: 41px; transform: translate3d(336px, 336px, 0px); z-index: 336;" tabindex="0"></div><div class="leaflet-popup-pane"></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="#" title="Zoom in">+</a><a class="leaflet-control-zoom-out" href="#" title="Zoom out">-</a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="http://leafletjs.com/" title="A JS library for interactive maps">Leaflet</a> | © <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a></div></div></div></div>
+<script type="application/json" data-for="htmlwidget-afa651a2897c1f4244bf">{"x":{"calls":[{"method":"addTiles","args":["http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap\u003c/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA\u003c/a>"}]},{"method":"addMarkers","args":[45.793467,15.970281,null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Plazza centar",null,null]}],"limits":{"lat":[45.793467,45.793467],"lng":[15.970281,15.970281]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-leaflet-example-polygons" class="section level2">
+<h2>Leaflet example, polygons</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">leaflet</span>()
+m &lt;-<span class="st"> </span><span class="kw">addTiles</span>(m) %&gt;%
+<span class="kw">addPolygons</span>(<span class="dt">data=</span>select,<span class="dt">color =</span> <span class="st">"#03F"</span>, <span class="dt">weight =</span> <span class="dv">5</span>, <span class="dt">opacity =</span> <span class="fl">0.5</span>,)
+m</code></pre></div>
+<div id="htmlwidget-9d1f2d888cae5cc1c7a0" style="width: 672px; height: 672px; position: relative;" class="leaflet html-widget html-widget-static-bound leaflet-container leaflet-fade-anim" tabindex="0"><div class="leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-tile-pane"><div class="leaflet-layer"><div class="leaflet-tile-container"></div><div class="leaflet-tile-container leaflet-zoom-animated"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(139px, 109px, 0px);" src="R%20and%20geodata_files/727_003.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(395px, 109px, 0px);" src="R%20and%20geodata_files/727_004.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(139px, 365px, 0px);" src="R%20and%20geodata_files/728_004.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(395px, 365px, 0px);" src="R%20and%20geodata_files/728_003.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(139px, -147px, 0px);" src="R%20and%20geodata_files/726_004.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(395px, -147px, 0px);" src="R%20and%20geodata_files/726_002.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-117px, 109px, 0px);" src="R%20and%20geodata_files/727_002.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(651px, 109px, 0px);" src="R%20and%20geodata_files/727.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-117px, 365px, 0px);" src="R%20and%20geodata_files/728.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(651px, 365px, 0px);" src="R%20and%20geodata_files/728_002.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(139px, 621px, 0px);" src="R%20and%20geodata_files/729_002.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(395px, 621px, 0px);" src="R%20and%20geodata_files/729_003.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-117px, -147px, 0px);" src="R%20and%20geodata_files/726_003.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(651px, -147px, 0px);" src="R%20and%20geodata_files/726.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-117px, 621px, 0px);" src="R%20and%20geodata_files/729_004.png"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(651px, 621px, 0px);" src="R%20and%20geodata_files/729.png"></div></div></div><div class="leaflet-objects-pane"><div class="leaflet-shadow-pane"></div><div class="leaflet-overlay-pane"><svg class="leaflet-zoom-animated" style="transform: translate3d(-14px, -14px, 0px);" width="701" height="701" viewBox="-14 -14 701 701"><g><path stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" stroke="#03F" stroke-opacity="0.5" stroke-width="5" fill="#03F" fill-opacity="0.2" class="leaflet-clickable" d="M479 99L499 98L515 101L518 103L524 113L527 135L518 138L499 152L495 156L491 164L490 183L487 192L487 243L482 264L475 272L459 273L455 275L447 285L439 282L435 273L436 261L442 245L442 234L439 226L420 211L391 210L382 182L387 153L392 145L392 138L387 114L419 119L425 118L449 107L458 107L468 104z"></path></g><g><path stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" stroke="#03F" stroke-opacity="0.5" stroke-width="5" fill="#03F" fill-opacity="0.2" class="leaflet-clickable" d="M166 510L185 495L203 486L226 484L267 472L282 479L296 481L306 495L317 507L320 512L321 519L319 525L309 535L296 537L278 544L268 550L245 552L233 556L225 562L214 574L195 571L176 561L154 557L145 544L149 536L160 523L165 514z"></path></g></svg></div><div class="leaflet-marker-pane"></div><div class="leaflet-popup-pane"></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="#" title="Zoom in">+</a><a class="leaflet-control-zoom-out" href="#" title="Zoom out">-</a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="http://leafletjs.com/" title="A JS library for interactive maps">Leaflet</a> | © <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a></div></div></div></div>
+<script type="application/json" data-for="htmlwidget-9d1f2d888cae5cc1c7a0">{"x":{"calls":[{"method":"addTiles","args":["http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap\u003c/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA\u003c/a>"}]},{"method":"addPolygons","args":[[[{"lng":[16.0540237426758,16.0624713897705,16.0676689147949,16.0758609771729,16.0782413482667,16.0806026458741,16.0833911895753,16.0849571228028,16.0855655670166,16.0864219665528,16.0808296203613,16.0786056518554,16.0674190521241,16.0647125244141,16.0621566772462,16.0615596771241,16.0612583160402,16.0612564086913,16.059446334839,16.0591430664062,16.0591945648194,16.0601425170898,16.0602493286134,16.0589408874512,16.0589542388917,16.0587520599365,16.0579223632813,16.0556144714355,16.0538349151612,16.0518875122071,16.0507354736329,16.0474243164063,16.0403385162354,16.0384120941163,16.0372867584229,16.0349044799806,16.0316200256348,16.0281639099121,16.0263538360597,16.0249271392822,16.0237407684327,16.0235900878907,16.0240497589112,16.0254592895508,16.0282306671143,16.0287055969239,16.0282249450684,16.0273857116699,16.0260734558105,16.0243606567383,16.0193653106689,16.0163440704346,16.0133628845215,16.0107612609864,16.0081386566163,15.9993448257446,15.9933471679687,15.9925670623779,15.9915933609009,15.9873027801514,15.9902515411378,15.9909353256226,15.9937572479249,15.9942035675049,15.9940586090088,15.9928226470947,15.9909324645997,15.996021270752,16.0023097991943,16.0095024108887,16.0126171112061,16.0164089202881,16.0314750671387,16.0334625244141,16.0392742156982,16.043041229248,16.0461673736573,16.0540237426758],"lat":[46.1995964050293,46.2001686096191,46.2001495361329,46.1993713378907,46.1988220214844,46.1978149414063,46.1957206726075,46.1930885314941,46.1902732849121,46.1827735900878,46.1812171936036,46.1804084777833,46.1745758056641,46.1725654602051,46.1690177917482,46.1676025390624,46.1660614013673,46.15975189209,46.155647277832,46.1541633605956,46.1526641845704,46.1494483947754,46.1482238769532,46.1422271728517,46.1313095092775,46.1283607482911,46.1255531311035,46.1211585998535,46.1192359924318,46.1180381774903,46.1175994873048,46.117042541504,46.1169624328613,46.1165847778321,46.1161727905273,46.1146965026855,46.1113510131836,46.1120758056642,46.112907409668,46.1142425537109,46.1172332763673,46.1193923950195,46.122673034668,46.1259765625001,46.1305885314942,46.1325035095215,46.1357917785646,46.1376342773439,46.1393356323243,46.1407775878906,46.1438751220704,46.1454086303712,46.1464653015137,46.1469192504883,46.1470947265626,46.146785736084,46.1469039916993,46.150074005127,46.1524238586427,46.1601295471191,46.1724395751953,46.1740722656251,46.1781539916992,46.1794776916505,46.1813430786132,46.1848716735839,46.1924858093263,46.1918334960937,46.1913681030274,46.1901206970215,46.1900787353517,46.1908760070801,46.1955261230469,46.1958351135254,46.196117401123,46.1964874267579,46.1972007751465,46.1995964050293]}],[{"lng":[15.8391456604003,15.8520374298097,15.8590621948242,15.8643856048584,15.8665628433228,15.8690700531006,15.8800268173217,15.8830633163453,15.8948411941529,15.9049673080445,15.9084453582764,15.9107217788697,15.9126558303833,15.9168615341187,15.9188070297241,15.9210729598999,15.9284152984619,15.9327001571655,15.9348926544189,15.9377450942993,15.9410429000855,15.9425945281982,15.9444265365601,15.94499874115,15.9451370239258,15.9448556900025,15.9440641403198,15.9402961730957,15.9388828277588,15.9371576309204,15.935359954834,15.9284505844117,15.9155464172364,15.9105815887451,15.9085483551025,15.9050617218019,15.8950891494752,15.8929071426392,15.8847455978394,15.8825902938843,15.8796396255494,15.8717708587648,15.8622388839722,15.8585443496704,15.8551788330079,15.8455047607423,15.8423080444336,15.8352756500244,15.8306941986085,15.8243322372436,15.8271770477294,15.8348417282105,15.8380708694458,15.8391456604003],"lat":[46.0039138793946,46.0110664367677,46.0137786865235,46.0153732299806,46.0158233642578,46.0161018371582,46.0166168212891,46.0169639587403,46.0198822021485,46.0219612121583,46.0221595764161,46.0219192504883,46.0214004516602,46.0195350646973,46.0189743041993,46.0186004638673,46.0178947448731,46.0134811401368,46.0115013122559,46.0092086791993,46.0071029663087,46.0056304931642,46.0032615661622,46.0016479492189,46.0000228881837,45.9984703063966,45.99711227417,45.9940528869629,45.9931602478028,45.9924278259277,45.9919776916505,45.9910850524902,45.9879760742188,45.9856643676758,45.9851303100586,45.9847640991212,45.9842720031738,45.9838981628418,45.9819564819337,45.9810523986817,45.979362487793,45.973731994629,45.9743270874024,45.9747772216796,45.9757728576661,45.9799385070801,45.9804840087892,45.9810333251954,45.9816741943359,45.9879264831544,45.9915199279785,45.9979209899903,46.0021286010743,46.0039138793946]}]],null,null,{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"dashArray":null,"smoothFactor":1,"noClip":false},null]}],"limits":{"lat":[45.973731994629,46.2001686096191],"lng":[15.8243322372436,16.0864219665528]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-example-data-from-ms-access" class="section level2">
+<h2>Example: data from MS Access</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#connect to the DB</span>
+ptice.db &lt;-<span class="kw">odbcDriverConnect</span>(<span class="st">"ptice_gps.mdb"</span>)
+
+<span class="co">#SQL query</span>
+galeb_52 &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(ptice.db, <span class="dt">query=</span><span class="st">"SELECT  (latitude) AS lat, (longitude) AS lon , gps_fixstatus ,altitude, date_time</span>
+<span class="st">    FROM galebovi_2008</span>
+<span class="st">    WHERE serijski_broj = 52"</span>)
+
+galeb_52_3d &lt;-<span class="st"> </span>galeb_52[<span class="kw">which</span>(galeb_52$gps_fixstatus ==<span class="st"> '3D'</span>),] 
+<span class="kw">str</span>(galeb_52_3d)</code></pre></div>
+</div>
+<div id="section-create-spacetime-class-object---package-spacetime" class="section level2">
+<h2>Create ‘spacetime’ class object - package ‘spacetime’</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sp &lt;-<span class="st"> </span><span class="kw">SpatialPoints</span>(galeb_52_3d[,<span class="kw">c</span>(<span class="st">"lon"</span>,<span class="st">"lat"</span>)])
+<span class="kw">proj4string</span>(sp) &lt;-<span class="st"> </span><span class="kw">CRS</span>(<span class="st">"+proj=longlat +datum=WGS84"</span>)
+<span class="kw">library</span>(spacetime)
+galeb_52_3d.st &lt;-<span class="st"> </span><span class="kw">STIDF</span>(sp, <span class="dt">time =</span> galeb_52_3d$date_time, <span class="dt">data =</span> galeb_52_3d)
+
+<span class="co">#select and sort by time</span>
+galeb_52_3d.st_600   &lt;-<span class="st"> </span>galeb_52_3d.st[<span class="dv">1</span>:<span class="dv">600</span>,]
+
+<span class="co">#shepe of an icon</span>
+shape &lt;-<span class="st"> "R_logo.png"</span>
+
+<span class="co">#export as kml</span>
+<span class="kw">library</span>(plotKML)
+<span class="kw">kml</span>(galeb_52_3d.st_600, <span class="dt">labels =</span> date_time, <span class="dt">colour =</span> altitude,<span class="dt">shape=</span>shape, <span class="dt">colour_scale=</span><span class="kw">rep</span>(<span class="st">"#FF00FF"</span>, <span class="dv">2</span>), <span class="dt">kmz =</span> F)</code></pre></div>
+<pre><code>KML file opened for writing...</code></pre>
+<pre><code>Writing to KML...</code></pre>
+<pre><code>Closing  galeb_52_3d.st_600.kml</code></pre>
+</div>
+<div id="section-example-data-from-postgrespostgis" class="section level2">
+<h2>Example: data from PostGres/PostGIS</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RPostgreSQL) <span class="co">#R / PostgreSQL connect</span>
+<span class="kw">library</span>(RODBC) <span class="co">#connect to diff ODBC DB</span>
+<span class="kw">library</span>(rpostgis) <span class="co">#additional functionality for PostgreSQl/PostGIS</span>
+drv &lt;-<span class="st"> </span><span class="kw">dbDriver</span>(<span class="st">"PostgreSQL"</span>)
+con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(drv, <span class="dt">user=</span><span class="st">"postgres"</span>,  <span class="dt">dbname =</span> <span class="st">"GEO_meetup"</span>, <span class="dt">host =</span> <span class="st">"PostgreSQL9.6(localhost:5432)"</span>, <span class="dt">password=</span><span class="st">"*****"</span>)
+<span class="kw">dbListTables</span>(con)
+HRV_adm1 &lt;-<span class="st"> "SELECT * FROM HRV_adm1*)</span>
+<span class="st">dbDisconnect(con)</span></code></pre></div>
+</div>
+<div id="section-examples-of-analysis" class="section level2">
+<h2>Examples of analysis</h2>
+<p>Nearest neighbourgs, k=2; library(spdep)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spdep)
+HRV_adm2_nn2&lt;-<span class="kw">knearneigh</span>(<span class="kw">coordinates</span>(HRV_adm2), <span class="dt">k=</span><span class="dv">2</span>) </code></pre></div>
+</div>
+<div id="section-visualisation-of-neighbours" class="section level2">
+<h2>Visualisation of neighbours</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(HRV_adm2, <span class="dt">border=</span><span class="st">"darkgrey"</span>, <span class="dt">axes=</span>T)
+<span class="kw">plot</span>(<span class="kw">knn2nb</span>(HRV_adm2_nn2), <span class="kw">coordinates</span>(HRV_adm2), <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">"darkseagreen"</span>)
+<span class="kw">title</span>(<span class="dt">main=</span><span class="st">"K nearest, k = 2"</span>)</code></pre></div>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-53-1.png"><!-- --></p>
+</div>
+<div id="section-analysis-of-point-pattern" class="section level2">
+<h2>Analysis of point pattern</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_HR_300 &lt;-<span class="st">  </span><span class="kw">spsample</span>(HRV_adm2,<span class="dv">300</span>, <span class="st">"random"</span>) 
+<span class="kw">class</span>(p_HR_300)</code></pre></div>
+<p>[1] “SpatialPoints” attr(,“package”) [1] “sp”</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">points_ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(p_HR_300) <span class="co">#create point pattern</span>
+points_ppp</code></pre></div>
+<p>Planar point pattern: 300 points window: rectangle = [13,537576, 18,993982] x [42,52764, 46,52316] units</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">den_10000 &lt;-<span class="st">  </span><span class="kw">density</span>(points_ppp, <span class="dv">10000</span>) <span class="co">#density of point pattern at 10000 m</span>
+<span class="kw">summary</span>(den_10000)<span class="co">#summary of the result</span></code></pre></div>
+<p>real-valued pixel image 128 x 128 pixel array (ny, nx) enclosing 
+rectangle: [13,53758, 18,99398] x [42,52764, 46,52316] units dimensions 
+of each pixel: 0,0426 x 0,03121499 units Image is defined on the full 
+rectangular grid Frame area = 21,8011742470826 square units Pixel values
+ range = [13,76073, 13,76073] integral = 300 mean = 13,76073</p>
+</div>
+<div id="section-visualisation-of-result-export-is-necessary" class="section level2">
+<h2>Visualisation of result, export is necessary</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(points_ppp), <span class="dt">main=</span><span class="st">"Intensity of point process"</span>, <span class="dt">col=</span><span class="kw">gray</span>(<span class="dv">0</span>:<span class="dv">40</span>/<span class="dv">40</span>))
+<span class="kw">points</span>(p_HR_300,  <span class="dt">cex=</span><span class="fl">1.2</span>, <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">col=</span><span class="st">"darkred"</span>,add==T)</code></pre></div>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-55-1.png"><!-- --></p>
+</div>
+<div id="section-library-geosphere" class="section level2">
+<h2>Library <em>geosphere</em></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pts &lt;-<span class="st"> </span><span class="kw">SpatialPoints</span>(<span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">8.33</span>, <span class="dv">30</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">47.22</span>, -<span class="dv">23</span>)))
+<span class="kw">proj4string</span>(pts) &lt;-<span class="st"> </span><span class="kw">CRS</span>(<span class="st">"+proj=longlat +datum=WGS84"</span>)
+
+<span class="co"># compute the great-circle</span>
+gcLine &lt;-<span class="st"> </span><span class="kw">greatCircle</span>(pts[<span class="dv">1</span>], pts[<span class="dv">2</span>], <span class="dt">sp =</span> <span class="ot">TRUE</span>)</code></pre></div>
+</div>
+<div id="section-visualising-results" class="section level2">
+<h2>Visualising results</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">spplot</span>(W[<span class="dv">1</span>], <span class="dt">col.regions =</span> <span class="st">"grey80"</span>, <span class="dt">sp.layout =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="st">"sp.lines"</span>, gcLine, 
+    <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">"blue"</span>), <span class="kw">list</span>(<span class="st">"sp.points"</span>, pts, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>, <span class="dt">col =</span> <span class="st">"red"</span>)), <span class="dt">colorkey =</span> <span class="ot">FALSE</span>)</code></pre></div>
+</div>
+<div id="section-visualising-results-1" class="section level2">
+<h2>Visualising results</h2>
+<p><img src="R%20and%20geodata_files/unnamed-chunk-59-1.png"><!-- --></p>
+</div>
+<div id="section-call-external-software-for-some-algorithm" class="section level2">
+<h2>Call external software for some algorithm</h2>
+<p>Example calling SAGA GIS geoprocessor</p>
+<p>Possible to have sevaral versions of SAGA, specify in the call</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSAGA)
+<span class="kw">rsaga.get.modules</span>(<span class="dt">env =</span> <span class="kw">rsaga.env</span>() )
+myenv &lt;-<span class="st">  </span><span class="kw">rsaga.env</span>(<span class="dt">path=</span><span class="st">"C:</span><span class="ch">\\</span><span class="st">Program Files (x86)</span><span class="ch">\\</span><span class="st">SAGA-GIS"</span>)
+<span class="kw">rsaga.get.modules</span>(<span class="dt">env=</span>myenv)
+<span class="kw">rsaga.get.modules</span>(<span class="st">"shapes_polygons"</span>)
+<span class="kw">rsaga.get.usage</span>(<span class="st">"shapes_polygons"</span>, <span class="dv">2</span>)
+<span class="kw">rsaga.geoprocessor</span> (<span class="dt">lib=</span><span class="st">"shapes_polygons"</span>, <span class="dv">2</span>, <span class="dt">param=</span><span class="kw">list</span>(<span class="dt">POLYGONS=</span><span class="st">"my_shapefile.shp"</span>, <span class="dt">OUTPUT=</span><span class="st">"result_shapefile.shp"</span>, <span class="dt">BAREA=</span>T))</code></pre></div>
+</div>
+</div>
+<div id="section-thank-you-for-your-attention" class="section level1">
+<h1>Thank you for your attention!</h1>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+</div></div>
+  </div>
+
+
+
+</body></html>
