@@ -1,0 +1,70 @@
+
+
+slides > slide.backdrop {
+  background:#dae3ed;
+  border-bottom: 0px;
+  box-shadow: 0 0 0;
+}
+
+
+slides > slide {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  border-bottom: 3px solid  darkgray;
+  box-shadow:  0 3px 0 #091721;
+  
+}
+
+.title-slide hgroup h1 {
+  color: #00008B;
+  font-size: 48px;
+  
+}
+
+.title-slide hgroup h2 {
+  font-size: 28px;
+}
+
+
+h2 {
+  
+  color:  #00008B;
+}
+
+slides > slide.dark {
+  background: white !important;
+    border-bottom: 0;
+  box-shadow: 0 0 0;
+}
+
+.segue h2 {
+  color: gray;
+}
+
+slides > slide.title-slide {
+  border-bottom: 0;
+  box-shadow: 0 0 0;
+}
+
+ol, ul {
+  
+  padding-bottom: 16px;
+  
+}
+
+slides > slide:not(.nobackground):before {
+      font-size: 10pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background:  no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 0.9;
+    }
+
+    
