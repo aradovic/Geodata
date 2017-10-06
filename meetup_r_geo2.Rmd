@@ -6,8 +6,8 @@ runtime: shiny
 output:
   
   
+  
   ioslides_presentation:
-    self_contained: true
     autosize: yes
     css: styles2.css
     fig_caption: yes
@@ -16,7 +16,6 @@ output:
     highlight: monochrome
     keep_md: yes
     logo: Rlogo.png
-  
 ---
 
 ```{r , echo=FALSE, warning=F, message=F}
