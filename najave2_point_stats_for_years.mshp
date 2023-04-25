@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAGA_METADATA>
+  <DATABASE>
+    <FIELDS>
+      <FIELD TYPE="STRING">Name</FIELD>
+      <FIELD TYPE="STRING">description</FIELD>
+      <FIELD TYPE="DATE">timestamp</FIELD>
+      <FIELD TYPE="DATE">begin</FIELD>
+      <FIELD TYPE="DATE">end</FIELD>
+      <FIELD TYPE="STRING">altitudeMode</FIELD>
+      <FIELD TYPE="LONGINT">tessellate</FIELD>
+      <FIELD TYPE="LONGINT">extrude</FIELD>
+      <FIELD TYPE="LONGINT">visibility</FIELD>
+      <FIELD TYPE="LONGINT">drawOrder</FIELD>
+      <FIELD TYPE="STRING">icon</FIELD>
+      <FIELD TYPE="STRING">OBJECTID</FIELD>
+      <FIELD TYPE="STRING">NAZIV</FIELD>
+      <FIELD TYPE="STRING">INVESTITOR</FIELD>
+      <FIELD TYPE="STRING">ADRESA</FIELD>
+      <FIELD TYPE="STRING">POCETAK_GR</FIELD>
+      <FIELD TYPE="STRING">KRAJ_GRAD</FIELD>
+      <FIELD TYPE="STRING">POCETAK_GR_Date</FIELD>
+      <FIELD TYPE="STRING">POCETAK_GR_Date_D</FIELD>
+      <FIELD TYPE="STRING">POCETAK_GR_Date_M</FIELD>
+      <FIELD TYPE="STRING">POCETAK_GR_Date_Y</FIELD>
+      <FIELD TYPE="STRING">POCETAK_GR_Date_f</FIELD>
+      <FIELD TYPE="STRING">END_DATE</FIELD>
+      <FIELD TYPE="STRING">END_DATE_part1</FIELD>
+      <FIELD TYPE="STRING">END_DATE_part2</FIELD>
+      <FIELD TYPE="STRING">END_DATE_part1_n</FIELD>
+      <FIELD TYPE="STRING">END_DATE_part2_n</FIELD>
+      <FIELD TYPE="STRING">FIN_end_date</FIELD>
+      <FIELD TYPE="STRING">NAZIV_OBJAVE</FIELD>
+      <FIELD TYPE="STRING">START_DATE2_Date</FIELD>
+      <FIELD TYPE="DOUBLE">START_DATE2_M</FIELD>
+      <FIELD TYPE="DOUBLE">START_DATE2_Y</FIELD>
+      <FIELD TYPE="STRING">start_Q</FIELD>
+      <FIELD TYPE="STRING">start_Q_Y</FIELD>
+      <FIELD TYPE="DOUBLE">START_DATE2_Date_Y</FIELD>
+      <FIELD TYPE="DOUBLE">FIN_end_date_MONTH</FIELD>
+      <FIELD TYPE="DOUBLE">FIN_end_date_Y</FIELD>
+      <FIELD TYPE="STRING">end_Q</FIELD>
+      <FIELD TYPE="STRING">end_Q_Y</FIELD>
+      <FIELD TYPE="LONGINT">Churn_all_years</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2021</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2020</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2019</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2018</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2017</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2016</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2015</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2014</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2014</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2015</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2016</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2017</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2018</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2019</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2020</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2021</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2023</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2014</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2015</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2016</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2017</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2018</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2019</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2020</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2021</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_1M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_2M</FIELD>
+      <FIELD TYPE="LONGINT">Churners_2022_3M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_4M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_5M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_6M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_7M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_8M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_1M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_2M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_3M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_4M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_5M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_6M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_7M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_8M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_9M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_10M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_11M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2022_12M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2023_1M</FIELD>
+      <FIELD TYPE="LONGINT">Iskon_aktivni_subscribers_2023_2M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_1M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_2M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_3M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_4M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_5M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_6M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_7M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_8M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_9M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_10M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_11M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2022_12M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_9M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_10M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_11M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_2022_11M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2023_1M</FIELD>
+      <FIELD TYPE="LONGINT">Churn_2023_2M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_20223_1M</FIELD>
+      <FIELD TYPE="DOUBLE">CR_20223_2M</FIELD>
+    </FIELDS>
+  </DATABASE>
+  <SOURCE></SOURCE>
+  <HISTORY saga-version="8.3.0">
+    <TOOL library="table_calculus" id="2" name="Field Calculator [Shapes]">
+      <OPTION type="table_field" id="FIELD" name="Field" index="-1">&lt;not set&gt;</OPTION>
+      <OPTION type="text" id="NAME" name="Field Name">Calculation</OPTION>
+      <OPTION type="text" id="FORMULA" name="Formula">(f107/(f107 + f89))*12</OPTION>
+      <OPTION type="boolean" id="SELECTION" name="Selection">true</OPTION>
+      <OPTION type="boolean" id="USE_NODATA" name="Use No-Data">false</OPTION>
+      <INPUT type="shapes" id="TABLE" name="Shapes">
+        <TOOL library="io_gdal" id="3" name="Import Shapes">
+          <OPTION type="file" id="FILES" name="Files">"E:\PODACI\adhoc\najave2.kml"</OPTION>
+          <OPTION type="choice" id="GEOM_TYPE" name="Geometry Type" index="0">Automatic</OPTION>
+          <OUTPUT type="shapes_list" id="SHAPES" name="Shapes">najave2</OUTPUT>
+        </TOOL>
+      </INPUT>
+      <OUTPUT type="shapes" id="RESULT" name="Result">Result</OUTPUT>
+    </TOOL>
+  </HISTORY>
+  <PROJECTION>
+    <OGC_WKT>GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]]</OGC_WKT>
+    <PROJ4>+proj=longlat +datum=WGS84 +no_defs</PROJ4>
+    <EPSG>4326</EPSG>
+  </PROJECTION>
+  <FILE>E:\PODACI\adhoc\najave2_point_stats_for_years.shp</FILE>
+  <DESCRIPTION></DESCRIPTION>
+</SAGA_METADATA>
